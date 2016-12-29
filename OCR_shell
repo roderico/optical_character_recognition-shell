@@ -1,4 +1,12 @@
 
+# Escrito por:  Roderico <superantigo arr0ba gmail.com>
+# Nascimento: 17-Janeiro-2015
+# Script para reconhecimento óptico de caracteres (OCR) 
+# Modo de uso:  só que não... #./NomeDoScript.sh 
+# Versão: 0.1
+# 
+
+
 #Passo 1:
 #Extração de imagem(ns) de PDF-scan.
 pdfimages -f NumeroDaPaginaInicial -l NumeroDaPaginaFinal NomeDoPDF.pdf NomeDaImagemQueSerahGerada
@@ -20,3 +28,16 @@ for isso in *;
 do convert $isso -crop 1065x1596 $a-A-Imagem.ppm;
 convert $isso -crop 1065x1596+1065+19 $a-B-Imagem.ppm;
 let a++; done
+
+#Passo Final do OCR stritu senso:
+#
+#
+tesseract -l por NomeDaMinhaImagemDeEntrada.ppm TextoDeSaida
+
+# Limpeza de dados:
+#
+# Apagando linhas em branco:
+sed '/^$/d' TextodeOrigem.txt >> novoarquivo.txt
+
+# JuntaLinhas; funções zz! :3 Embora o ideal de uso desse programinha ainda seja parágrafo por parágrafo... =/
+zzjuntalinhas TextoDeOrigem.txt>>TextoDeSaida.tx
