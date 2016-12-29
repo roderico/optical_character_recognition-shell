@@ -12,8 +12,8 @@
 pdfimages -f NumeroDaPaginaInicial -l NumeroDaPaginaFinal NomeDoPDF.pdf NomeDaImagemQueSerahGerada
 
 
-#Passo 2:
-# CASO haja duas páginas por imagem:
+#Passo 2 CASO haja duas páginas por imagem:
+# 
 # Cortar imagens pela metade com imagemagick (importante):
 # convert: nome do programa que faz parte do pacote imagemagick
 # O primeiro comando cortará a metade da esquerda,
@@ -33,6 +33,9 @@ let a++; done
 #
 #
 tesseract -l por NomeDaMinhaImagemDeEntrada.ppm TextoDeSaida
+#Automação. É necessário fazer a listagem por hora de criação do arquivo, já que o shell listará todo bagunçado,
+# por conta da numeração 1A, 1B, 2A, 2B...
+a=1; for isso in $( ls -1r --sort=time * ); do  tesseract -l por $isso gyuoc; cat gyuoc.txt >>DB; let a++; done
 
 # Limpeza de dados:
 #
