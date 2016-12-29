@@ -41,3 +41,8 @@ sed '/^$/d' TextodeOrigem.txt >> novoarquivo.txt
 
 # JuntaLinhas; funções zz! :3 Embora o ideal de uso desse programinha ainda seja parágrafo por parágrafo... =/
 zzjuntalinhas TextoDeOrigem.txt>>TextoDeSaida.tx
+
+# Automação:
+#
+#i-> cada arquivo de imagem que será passado por OCR.
+for i in *pbm; do tesseract -l por $i temp; cat temp.txt >>DB; done
