@@ -1,0 +1,22 @@
+
+#Passo 1:
+#Extração de imagem(ns) de PDF-scan.
+pdfimages -f NumeroDaPaginaInicial -l NumeroDaPaginaFinal NomeDoPDF.pdf NomeDaImagemQueSerahGerada
+
+
+#Passo 2:
+# CASO haja duas páginas por imagem:
+# Cortar imagens pela metade com imagemagick (importante):
+# convert: nome do programa que faz parte do pacote imagemagick
+# O primeiro comando cortará a metade da esquerda,
+# o segundo da direita:
+convert Imagem.ppm -crop 1065x1596 Imagem-A.ppm 
+
+convert Imagem.ppm -crop 1065x1596+1065+19 Imagem-B.ppm
+
+# uma primeira tentativa de automatizar esse processo:
+a=1;
+for isso in *;
+do convert $isso -crop 1065x1596 $a-A-Imagem.ppm;
+convert $isso -crop 1065x1596+1065+19 $a-B-Imagem.ppm;
+let a++; done
