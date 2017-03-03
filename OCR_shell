@@ -23,9 +23,20 @@ convert Imagem.ppm -crop 1065x1596 Imagem-A.ppm
 convert Imagem.ppm -crop 1065x1596+1065+19 Imagem-B.ppm
 
 # uma primeira tentativa de automatizar esse processo:
+
 a=1;
 for isso in *;
+# Como aqui a intenção é que o arquivo seja automaticamente
+# dividido mais ou menos pela metade, vc descobre o tamanho total da imagem
+# da forma que mais lhe aprouver, e daí: no primeiro valor (1065x1596);
+# o que vem antes do x (1065) deve ser o valor relativo a METADE do tamanho
+# total da imagem original. Podemos deduzir então que o tamanho original dessa
+# imagem do exemplo era de 2130. O segundo valor, após o x, é a largura da imagem.
+# Portanto, (GERALMENTE) não interessa modificar esse valor.
+# Ao diminuir gradualmente esse valor, sua imagem será gradualmente cortada na base.
+#
 do convert $isso -crop 1065x1596 $a-A-Imagem.ppm;
+# Aqui é bem mais complicado. Eu uso por pura tentativa e erro, empiricamente. =S 
 convert $isso -crop 1065x1596+1065+19 $a-B-Imagem.ppm;
 let a++; done
 
