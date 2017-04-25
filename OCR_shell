@@ -7,17 +7,29 @@
 # 
 
 
-#Passo 1:
-#Extração de imagem(ns) de PDF-scan.
+# Passo 1A:
+# Extração de imagem(ns) de PDF-scan.
 pdfimages -f NumeroDaPaginaInicial -l NumeroDaPaginaFinal NomeDoPDF.pdf NomeDaImagemQueSerahGerada
 
+
+#  Passo 1B:
+#  Se necessário girar as imagens:
+#  90--> vira prá direita
+# -90--> vira prá esquerda
+#  Em lote:
+b=1
+for cadaUma in *.ppm;
+do
+  convert -rotate 90 $cadaUma $bNovoNome;
+  let b++;
+done
 
 #Passo 2 CASO haja duas páginas por imagem:
 # 
 # Cortar imagens pela metade com imagemagick (importante):
 # convert: nome do programa que faz parte do pacote imagemagick
 # O primeiro comando cortará a metade da esquerda,
-# o segundo da direita:
+# o segundo, da direita:
 convert Imagem.ppm -crop 1065x1596 Imagem-A.ppm 
 
 convert Imagem.ppm -crop 1065x1596+1065+19 Imagem-B.ppm
